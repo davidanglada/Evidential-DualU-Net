@@ -1,0 +1,8 @@
+visualization:
+  image: /path/to/image.png
+  predictions: outputs/inference/prediction.npz
+  output: outputs/figures/uncertainty.png
+  maps: [aleatoric, epistemic, vacuity, entropy, mutual_information]
+  colormap: magma
+  dpi: 150
+

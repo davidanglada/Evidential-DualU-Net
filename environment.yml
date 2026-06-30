@@ -1,0 +1,23 @@
+name: evidential-dualunet
+channels: [pytorch, conda-forge]
+dependencies:
+  - python=3.10
+  - pytorch>=2.0
+  - torchvision>=0.15
+  - numpy>=1.23
+  - scipy>=1.9
+  - scikit-image>=0.20
+  - scikit-learn>=1.2
+  - opencv>=4.7
+  - matplotlib>=3.7
+  - pyyaml>=6.0
+  - tqdm>=4.65
+  - pillow>=9.5
+  - h5py>=3.8
+  - pip
+  - pip:
+      - pycocotools>=2.0.6
+      - torchmetrics>=1.0
+      - timm>=0.9
+      - wandb>=0.15
+

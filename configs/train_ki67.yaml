@@ -1,0 +1,14 @@
+dataset:
+  train: {name: ki67, root: /path/to/ki67, fold: train, num_classes: 2}
+  val: {name: ki67, root: /path/to/ki67, fold: val, num_classes: 2}
+loader:
+  train: {shuffle: true, batch_size: 8, num_workers: 4, drop_last: false}
+  val: {shuffle: false, batch_size: 4, num_workers: 2, drop_last: false}
+model: {model_name: dualunet, encoder_name: resnet34, encoder_weights: imagenet, classes_s: 2, classes_c: 1, decoder_channels: [256, 128, 64, 32, 16], decoder_use_batchnorm: true}
+optimizer: {lr_base: 0.0001, epochs: 200, weight_decay: 0.0001, lr_drop_factor: 0.1, lr_drop_steps: [140, 180], lr_auto_scale: true, base_batch_size: 8}
+training: {loss_type: base, seg_mode: edl_mse, weight_seg: 1.0, weight_cent: 0.7, weight_dice: 0.4, kl_variant_seg: sensoy, kl_apply_seg: all, kl_max: 0.2, kl_ramp_epochs: 40, sigma: 5}
+transforms: {normalize: {mean: [0.485, 0.456, 0.406], std: [0.229, 0.224, 0.225]}, augmentations: [{name: hflip, p: 0.5}, {name: vflip, p: 0.5}]}
+evaluation: {thresholds: [0.5], max_pair_distance: 12, interval: 10, th_centroid: 0.15}
+experiment: {wandb: false, project: Evidential-DualU-Net, name: ki67_baseline, seed: 42, output_dir: outputs/ki67, output_name: best, resume: false}
+distributed: false
+

@@ -1,0 +1,17 @@
+numpy>=1.23
+scipy>=1.9
+torch>=2.0
+torchvision>=0.15
+scikit-image>=0.20
+scikit-learn>=1.2
+opencv-python>=4.7
+matplotlib>=3.7
+PyYAML>=6.0
+tqdm>=4.65
+Pillow>=9.5
+h5py>=3.8
+pycocotools>=2.0.6
+torchmetrics>=1.0
+timm>=0.9
+wandb>=0.15
+

@@ -1,0 +1,110 @@
+dataset:
+  train:
+    name: pannuke
+    root: "/path/to/pannuke"
+    fold: foldfold_3
+    num_classes: 5                # 5 nucleus foreground classes (background is added internally)
+  val:
+    name: pannuke
+    root: "/path/to/pannuke"
+    fold: foldfold_1
+    num_classes: 5
+
+loader:
+  train:
+    shuffle: True
+    batch_size: 16
+    num_workers: 4
+    drop_last: False
+  val:
+    shuffle: False
+    batch_size: 4
+    num_workers: 1
+    drop_last: False
+
+optimizer:
+  lr_base: 0.0001
+  epochs: 200
+  weight_decay: 0.0001
+  lr_drop_factor: 0.1
+  lr_drop_steps: [140, 180]
+  lr_auto_scale: True
+  base_batch_size: 16
+  centroid_head_lr_mult: 0.5
+
+distributed: True
+
+training:
+  loss_type: base
+  seg_mode: edl_mse
+  cent_mode: edl_mse
+  weight_seg: 1.0
+  weight_cent: 1.0
+  weight_dice: 0.15
+  dice_gamma: 3.0
+  label_smoothing: 0.04
+  class_weights: [1.5, 1.0, 1.0, 1.0, 1.0, 1.0]   # BG + 5 FG
+  pos_weight_cent: 1.0
+  ignore_index: null
+
+  # KL (seg/cent heads)
+  kl_max: 2e-1
+  kl_ramp_epochs: 80
+  kl_variant_seg: vanilla
+  kl_apply_seg: misclassified
+  kl_variant_cent: vanilla
+  kl_apply_cent: misclassified
+
+  # UWG (seg head) - disabled in base
+  uwg_enable: false
+  uwg_style: gate
+  uwg_proxy: mse
+  uwg_gamma: 10.0
+  uwg_tau_mode: median
+  uwg_tau: 0.5
+  uwg_norm_mean1: true
+  eps_brier: 1e-8
+
+  # Class weights path (used/created automatically for seg head)
+  ce_weights: ./ce_weights_pannuke_foldfold_3_b10.npy
+
+  # Centroid GT (if you still build Gaussian → prob maps)
+  sigma: 5
+  sigma_mode: fixed               # fixed | bbox
+  sigma_factor: 0.15              # only if sigma_mode == bbox
+  centroid_combine: max           # max | noisy_or | clip_sum
+
+transforms:
+  normalize:
+    mean: [0.485, 0.456, 0.406]
+    std:  [0.229, 0.224, 0.225]
+  augmentations:
+    - name: "hflip"
+      p: 0.5
+    - name: "vflip"
+      p: 0.5
+    - name: "rotate90"
+
+model:
+  encoder_name: resnext50_32x4d
+  classes_s: 5                     # seg K=5 (foreground); background added in loss
+  classes_c: 2                     # Beta head: centroid vs background
+  encoder_weights: imagenet
+  decoder_channels: [256, 128, 64, 32, 16]
+  decoder_use_batchnorm: True
+  model_name: dualunet
+
+evaluation:
+  thresholds: [0.5]
+  max_pair_distance: 12
+  interval: 10
+  th_centroid: 0.15
+
+experiment:
+  wandb: True
+  project: "EvidentialUNet_pannuke_EDL"
+  name: "dualunet_base"
+  seed: 42
+  output_dir: outputs/checkpoints
+  output_name: "dualunet_base"
+  resume: False

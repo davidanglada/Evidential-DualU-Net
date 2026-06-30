@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper below."
+title: "Evidential DualU-Net: Single-Pass Uncertainty for Cell Instance Segmentation"
+type: software
+authors:
+  - family-names: Anglada-Rotger
+    given-names: David
+  - family-names: Marques
+    given-names: Ferran
+  - family-names: Pardàs
+    given-names: Montse
+repository-code: "https://github.com/davidanglada/Evidential-DualU-Net"
+license: MIT
+version: 0.1.0
+date-released: 2026-06-29
+preferred-citation:
+  type: article
+  title: "Evidential DualU-Net: Single-Pass Uncertainty for Cell Instance Segmentation"
+  authors:
+    - family-names: Anglada-Rotger
+      given-names: David
+    - family-names: Marques
+      given-names: Ferran
+    - family-names: Pardàs
+      given-names: Montse
+  year: 2026
+  journal: "TODO"
