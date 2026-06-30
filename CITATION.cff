@@ -10,11 +10,12 @@ authors:
   - family-names: Pardàs
     given-names: Montse
 repository-code: "https://github.com/davidanglada/Evidential-DualU-Net"
+url: "https://openreview.net/forum?id=GALXBAr9WX"
 license: MIT
 version: 0.1.0
 date-released: 2026-06-29
 preferred-citation:
-  type: article
+  type: conference-paper
   title: "Evidential DualU-Net: Single-Pass Uncertainty for Cell Instance Segmentation"
   authors:
     - family-names: Anglada-Rotger
@@ -24,4 +25,11 @@ preferred-citation:
     - family-names: Pardàs
       given-names: Montse
   year: 2026
-  journal: "TODO"
+  conference:
+    name: "Medical Imaging with Deep Learning 2026"
+  collection-title: "Proceedings of Machine Learning Research"
+  volume: 285
+  start: 1
+  end: 28
+  url: "https://openreview.net/forum?id=GALXBAr9WX"
+  license: CC-BY-4.0

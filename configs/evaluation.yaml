@@ -1,8 +1,7 @@
 dataset: {test: {name: pannuke, root: /path/to/pannuke, fold: fold_3, num_classes: 5}}
 loader: {test: {shuffle: false, batch_size: 4, num_workers: 2, drop_last: false}}
-model: {model_name: dualunet, encoder_name: resnet34, encoder_weights: null, classes_s: 5, classes_c: 1, decoder_channels: [256, 128, 64, 32, 16], decoder_use_batchnorm: true}
+model: {model_name: dualunet, encoder_name: resnext50_32x4d, encoder_weights: null, classes_s: 5, classes_c: 1, decoder_channels: [256, 128, 64, 32, 16], decoder_use_batchnorm: true}
 transforms: {normalize: {mean: [0.485, 0.456, 0.406], std: [0.229, 0.224, 0.225]}}
 evaluation: {thresholds: [0.5], max_pair_distance: 12, centroid_h: 0.15, save_metrics: outputs/evaluation/metrics.json}
 experiment: {wandb: false, name: pannuke_test, seed: 42, ckpt_path: /path/to/checkpoints/model.pth, output_dir: outputs/evaluation, output_name: model}
 distributed: false
-

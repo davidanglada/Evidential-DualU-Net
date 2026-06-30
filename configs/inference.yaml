@@ -1,4 +1,3 @@
-model: {model_name: dualunet, encoder_name: resnet34, encoder_weights: null, classes_s: 5, classes_c: 1, decoder_channels: [256, 128, 64, 32, 16], decoder_use_batchnorm: true}
+model: {model_name: dualunet, encoder_name: resnext50_32x4d, encoder_weights: null, classes_s: 5, classes_c: 1, decoder_channels: [256, 128, 64, 32, 16], decoder_use_batchnorm: true}
 transforms: {normalize: {mean: [0.485, 0.456, 0.406], std: [0.229, 0.224, 0.225]}}
 inference: {checkpoint: /path/to/checkpoints/model.pth, input: /path/to/image.png, output_dir: outputs/inference, foreground_threshold: 0.5, centroid_threshold: 0.15}
-
